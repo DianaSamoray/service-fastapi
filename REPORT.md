@@ -690,7 +690,7 @@ X = 642 це 171 мс. Саме тому генератор із фіксова�
 {"errors":[{"field":"id","message":"donor not found"}]}
 ```
 
-## 10. Етап 8. Додаткова вимога: healthcheck без `curl` і `wget`
+## 10. Етап 8. Додаткова вимога: обмеження драйвера логів за розміром і кількістю файлів
 
 Healthcheck у `docker-compose.yml` виконує інтерпретатор Python:
 `python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"`.
@@ -707,14 +707,14 @@ donors-web-2   Up 44 seconds (healthy)   8000/tcp
 ```
 
 ### Розмір фінального образу
-`docker image inspect donor-registry:latest --format {{.Size}} байт`
+`docker image inspect shifts:latest --format {{.Size}} байт`
 
 ```
 65625557 байт
 ```
 
 ### Шари образу
-`docker image history donor-registry:latest --format {{.Size}}	{{.CreatedBy}}`
+`docker image history shifts:latest --format {{.Size}}	{{.CreatedBy}}`
 
 ```
 0B	CMD ["uvicorn" "app.main:app" "--host" "0.0.…
