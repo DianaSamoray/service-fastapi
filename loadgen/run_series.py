@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "results"
 RATES = (10, 100, 500)
 REPEATS = 3
-PATH = "/donor-registry/{id}"
+PATH = "/shifts/{id}"
 
 
 def env_port():
