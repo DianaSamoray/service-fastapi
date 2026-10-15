@@ -32,9 +32,9 @@ def web():
 w = web()
 sh("Контейнери, порти і стан здоровʼя (публікує порт лише lb)",
    ["docker", "compose", "ps", "--format", "table {{.Name}}\t{{.Status}}\t{{.Ports}}"])
-sh("Розмір фінального образу", ["docker", "image", "inspect", "donor-registry:latest", "--format",
+sh("Розмір фінального образу", ["docker", "image", "inspect", "shifts:latest", "--format",
                                 "{{.Size}} байт"])
-sh("Шари образу", ["docker", "image", "history", "donor-registry:latest", "--format",
+sh("Шари образу", ["docker", "image", "history", "shifts:latest", "--format",
                    "{{.Size}}\t{{.CreatedBy}}"])
 sh("Процес у контейнері: uid і користувач", ["docker", "exec", w, "id"])
 sh("curl, wget, gcc в образі відсутні (додаткова вимога: healthcheck без curl/wget)",
