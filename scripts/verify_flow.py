@@ -64,7 +64,7 @@ def flow():
     call("POST", "/shifts", shift(duration_hours=3), "400: тривалість чергування 3 години")
     call("POST", "/shifts", shift(duration_hours=27), "400: тривалість чергування 27 годин")
     call("GET", "/shifts?limit=5", note="перелік")
-    call("GET", "/donor-registry?available=false&limit=5", note="перелік з фільтром available=false")
+    call("GET", "/shifts?department='surgery'&limit=5", note="перелік з фільтром department")
     call("GET", "/shifts?limit=1000", note="400: limit понад максимум")
     call("GET", f"/shifts/{i}", note="за ідентифікатором")
     call("PUT", f"/shifts/{i}", shift(beginning_time="13:00", duration_hours=6, shift_type="day"),
