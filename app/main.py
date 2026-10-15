@@ -124,7 +124,7 @@ async def list_doctors(
     offset: int = Query(0, ge=0),
     department: str = Field(min_length=1, max_length=64) | None = None,
 ):
-    where, params = ("WHERE department = %s", [department]) if available is not None else ("", [])
+    where, params = ("WHERE department = %s", [department]) if department is not None else ("", [])
     async with pool.connection() as conn:
         cur = await conn.execute(
             f"SELECT {COLS} FROM shifts {where} ORDER BY id LIMIT %s OFFSET %s",
