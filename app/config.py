@@ -1,4 +1,4 @@
-@app.delete("/shifts/{id}")
+@app.delete("/shifts/{id}", status_code=204)
 def delete(
   pid: int,
   session: Session=Depends(get_session)
