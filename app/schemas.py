@@ -5,7 +5,7 @@ class ShiftIn(Base):
   doctor: str=field(min_length=3, max_length=64)
   department: str=field(min_length=3, max_length=64)
   shift_date: date
-  beginning_time: int
+  beginning_time: str=field(min_length=4, max_length=8)
   duration_hours: int
   shift_type: str=field(min_length=3, max_length=64)
   @field_validation("duration_hours")
