@@ -55,7 +55,7 @@ async def root():
     return RedirectResponse("/docs")
 
 
-class DonorIn(BaseModel):
+class ShiftIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     doctor: str = Field(min_length=1, max_length=64)
