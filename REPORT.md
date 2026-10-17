@@ -365,7 +365,7 @@ LB_PORT=18080
 
 ### Сценарій і команди
 
-Вимірюється `GET /donor-registry/{id}`. Перед серією `loadgen/seed.py` заносить 100 записів, ідентифікатори беруться
+Вимірюється `GET /shifts/{id}`. Перед серією `loadgen/seed.py` заносить 100 записів, ідентифікатори беруться
 з них. Рівні 10, 100 і 500 rps за завданням, додатково 700, 800 і 1000, щоб побачити межу. Прогрів 10 с +
 вимірювання 30 с, 3 повтори на рівень, у таблицю медіана. Команди (з кореня репозиторію):
 
@@ -728,14 +728,14 @@ shifts-web-2   Up 44 seconds (healthy)   8000/tcp
 ```
 
 ### Процес у контейнері: uid і користувач
-`docker exec donors-web-2 id`
+`docker exec shifts-web-2 id`
 
 ```
 uid=10001(app) gid=999(app) groups=999(app)
 ```
 
 ### додаткова вимога: обмеження драйвера логів за розміром і кількістю файлів
-`docker exec donors-web-2 sh -c for c in curl wget gcc; do command -v $c || echo "$c: немає"; done`
+`docker exec shifts-web-2 sh -c for c in curl wget gcc; do command -v $c || echo "$c: немає"; done`
 
 ```
 curl: немає
@@ -744,14 +744,14 @@ gcc: немає
 ```
 
 ### Healthcheck сервісу (команда і стан)
-`docker inspect donors-web-2 --format {{json .Config.Healthcheck.Test}} => {{.State.Health.Status}}`
+`docker inspect shift-web-2 --format {{json .Config.Healthcheck.Test}} => {{.State.Health.Status}}`
 
 ```
 ["CMD","python","-c","import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"] => healthy
 ```
 
 ### Обмеження ресурсів web
-`docker inspect donors-web-2 --format NanoCpus={{.HostConfig.NanoCpus}} Memory={{.HostConfig.Memory}}`
+`docker inspect shift-web-2 --format NanoCpus={{.HostConfig.NanoCpus}} Memory={{.HostConfig.Memory}}`
 
 ```
 NanoCpus=1000000000 Memory=536870912
@@ -779,7 +779,7 @@ NanoCpus=1000000000 Memory=536870912
 ```
 
 ### База доступна з контейнера сервісу за іменем db
-`docker exec donors-web-2 python -c import socket;s=socket.create_connection(('db',5432),2);print('db:5432 підключення є')`
+`docker exec shifts-web-2 python -c import socket;s=socket.create_connection(('db',5432),2);print('db:5432 підключення є')`
 
 ```
 db:5432 підключення є
@@ -846,7 +846,7 @@ donors-web-2
 
 Що перевірено після моделі (запуском, а не читанням коду):
 
-- повний цикл запитів із кодами 201/400/404/409/204 і повторним DELETE -> 404 (розділ 9), збереження даних після
+- повний цикл запитів із кодами 201/400/404/204 і повторним DELETE -> 404 (розділ 9), збереження даних після
   `down` і порожня база після `down -v`;
 - що `/healthz` справді віддає 503 при зупиненій базі, а не лише перевіряє живий процес (розділ 2);
 - що стенд піднімається однією командою і з одним, і з двома інстансами, і що на свіжому стенді запити одразу
