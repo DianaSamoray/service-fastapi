@@ -9,6 +9,6 @@ class Shift(Base):
   doctor: Mapped[str]=mapped_column(String(64))
   department: Mapped[str]=mapped_column(String(64), index=True)
   shift_date: Mapped[date]=mapped_column(date)
-  beginning_time: Mapped[str]=mapped_column(String(5))
+  beginning_time: Mapped[str]=mapped_column(String(8))
   duration_hours: Mapped[int]=mapped_column(SmallInteger)
   shift_type: Mapped[str]=mapped_column(String(64))  
