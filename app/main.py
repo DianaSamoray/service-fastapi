@@ -34,7 +34,7 @@ def list_shifts(department: str | None=None,
            "total": total, "limit": limit, "offset": offset}
 
 @app.get("/healthz")
-def healthz(session: Session=Depends(get_sessions)):
+def healthz(session: Session=Depends(get_session)):
     try:
         session.execute(select(1))
     except Exception as exc:
