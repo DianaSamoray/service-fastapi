@@ -55,6 +55,10 @@ python loadgen/calc.py                              # три розрахунк�
 | Шлях | Призначення |
 |---|---|
 | `app/main.py` | сервіс: 6 ендпоінтів, валідація |
+| `app/db.py` | двигун, сесія і життєвий цикл |
+| `app/models.py` | опис таблиці |
+| `app/config.py` | читання змінних середовища |
+| `app/schemas.py` | моделі запиту і відповіді Pydantic |
 | `db/schema.sql` | схема, накочується з `/docker-entrypoint-initdb.d` |
 | `Dockerfile`, `.dockerignore` | багатоетапна збірка на `python:3.12-slim` |
 | `docker-compose.yml`, `lb/nginx.conf` | стенд: db, web (N реплік), lb |
