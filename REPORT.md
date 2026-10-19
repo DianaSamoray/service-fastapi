@@ -245,6 +245,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    logging:
+      # обмеження драйвера логів за розміром і кількістю файлів
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
     healthcheck:
       # без curl і wget: перевіряє інтерпретатор
       test:
