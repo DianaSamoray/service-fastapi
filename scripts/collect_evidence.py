@@ -26,7 +26,7 @@ def sh(title, cmd, note=""):
 def web():
     names = subprocess.run(["docker", "compose", "ps", "--format", "{{.Name}}", "web"], cwd=ROOT,
                            capture_output=True, text=True).stdout.split()
-    return names[0] if names else "donors-web-1"
+    return names[0] if names else "shifts-web-1"
 
 
 w = web()
