@@ -230,6 +230,11 @@ services:
       interval: 2s
       timeout: 3s
       retries: 30
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
     networks: [backend]
 
   web:
@@ -246,18 +251,12 @@ services:
       db:
         condition: service_healthy
     logging:
-      # обмеження драйвера логів за розміром і кількістю файлів
       driver: json-file
       options:
         max-size: "50m"
         max-file: "3"
     healthcheck:
-      # без curl і wget: перевіряє інтерпретатор
-      test:
-        - CMD
-        - python
-        - -c
-        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/healthz"]
       interval: 2s
       timeout: 3s
       retries: 15
