@@ -740,7 +740,7 @@ uid=10001(app) gid=999(app) groups=999(app)
 ```
 
 ### додаткова вимога: обмеження драйвера логів за розміром і кількістю файлів
-`docker exec shifts-web-2 sh -c for c in curl wget gcc; do command -v $c || echo "$c: немає"; done`
+`docker inspect shifts-web-2 --format LogConfig Type={{.HostConfig.LogConfig.Type}} Config={{json .HostConfig.LogConfig.Config}}`
 
 ```
 curl: немає
