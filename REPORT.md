@@ -687,9 +687,9 @@ X = 642 це 171 мс. Саме тому генератор із фіксова�
 
 ## 10. Етап 8. Додаткова вимога: обмеження драйвера логів за розміром і кількістю файлів
 
-Healthcheck у `docker-compose.yml` виконує інтерпретатор Python:
-`python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"`.
-Образ не містить ні `curl`, ні `wget`. Підтвердження (вивід команд, `results/evidence.md`):
+Драйвер логів обмежується за розміром і кількістю файлів:
+`logging: max-size: "50m", max-file: "3"`.
+Максимальний розмір файлу 50 МБ, максимальна кількість файлів 3. Підтвердження (вивід команд, `results/evidence.md`):
 
 ### Контейнери, порти і стан здоровʼя (публікує порт лише lb)
 `docker compose ps --format table {{.Name}}	{{.Status}}	{{.Ports}}`
