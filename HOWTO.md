@@ -157,7 +157,7 @@ curl "http://127.0.0.1:18080/shifts?limit=5"
 ```
 
 ```bash
-curl "http://127.0.0.1:18080/shifts?available=true&limit=5"
+curl "http://127.0.0.1:18080/shifts?department=surgery&limit=5"
 ```
 
 ```bash
