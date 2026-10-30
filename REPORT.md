@@ -831,6 +831,8 @@ donors-web-2
 
 **Виправлення помилок, допущених під час самостійної роботи зі стендом.** Кілька прикладів:
 
+- Команда `docker compose up -d --build` показала помилку `dependency error` на `shifts-db`, тому команда `curl http://127.0.0.1:18080/healthz`
+видала, що сервер недоступний.
 - `docker compose down -v` запущено не з кореня репозиторію — відповідь `no configuration file provided: not found`.
   Причина: Compose шукає `docker-compose.yml` у поточній теці. Виправлено переходом у теку проєкту.
 - У PowerShell `curl` є псевдонімом до `Invoke-WebRequest`, тому запит до `/healthz` обривався попередженням
