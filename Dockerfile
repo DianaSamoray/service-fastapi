@@ -7,9 +7,13 @@ RUN python -m venv /opt/venv
 COPY requirements.txt .
 RUN /opt/venv/bin/pip install -r requirements.txt
 
-# final: без компіляторів, pip-кешу, curl і wget
+# final: додаємо curl для виконання healthcheck
 FROM python:3.12-slim
 ENV PATH=/opt/venv/bin:$PATH PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+
+# Встановлюємо curl для healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
 RUN useradd --system --uid 10001 --no-create-home app
 COPY --from=builder /opt/venv /opt/venv
 WORKDIR /srv
